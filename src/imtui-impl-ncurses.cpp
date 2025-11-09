@@ -210,6 +210,10 @@ bool ImTui_ImplNcurses_NewFrame() {
                 if ((mstate & 0x000f) == 0x0001) lbut = 0;
                 if ((mstate & 0xf000) == 0x2000) rbut = 1;
                 if ((mstate & 0xf000) == 0x1000) rbut = 0;
+                if (mstate & BUTTON4_PRESSED)
+                    ImGui::GetIO().MouseWheel = 0.2f;
+                else if (mstate & BUTTON5_PRESSED)
+                    ImGui::GetIO().MouseWheel = -0.2f;
                 //printf("mstate = 0x%016lx\n", mstate);
                 ImGui::GetIO().KeyCtrl |= ((mstate & 0x0F000000) == 0x01000000);
             }
